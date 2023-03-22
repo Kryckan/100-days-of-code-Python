@@ -34,5 +34,3 @@ def reveal():
 
 
 new_bidder()
-new_bidder()
-new_bidder()
