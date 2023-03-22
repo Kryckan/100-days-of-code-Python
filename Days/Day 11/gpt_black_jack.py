@@ -15,7 +15,6 @@ def thank_you():
 def welcome():
     os.system("cls")
     print(logo)
-
     print("Welcome to a game of Black Jack! \n")
     print(
         "The goal of this game is to get as close to 21 as possible without going over.\n"
@@ -31,6 +30,8 @@ def start_hand():
 
 
 def player_hand_show():
+    os.system("cls")
+    print(logo)
     print("You have the cards: ")
     print(player_hand)
     print(f"With a total of: {sum(player_hand)}")
@@ -71,13 +72,14 @@ def game():
     start_hand()
     print(f"Dealers hand: {dealer_hand[0]} & * ")
 
-    while hit:
+    while hit is True:
         if sum(player_hand) < 22:
             player_hand_show()
             if input("Do you want one more card? y/n: ") != "y":
                 hit = False
             else:
                 player_hand.append(random.choice(cards))
+                os.system("cls")
         else:
             player_hand_show()
             print(f"Sorry! You busted with a total of {sum(player_hand)}")
@@ -86,6 +88,7 @@ def game():
                 game()
             else:
                 thank_you()
+        os.system("cls")
 
     dealer_hand_show()
 
@@ -95,4 +98,5 @@ def game():
     check_won()
 
 
+game()
 game()
