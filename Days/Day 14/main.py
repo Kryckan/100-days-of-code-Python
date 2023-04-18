@@ -29,7 +29,7 @@ def greet():
 
 
 def check_answer():
-    global correct_answer
+    global correct_answer§
     if player_choice == 0:
         if compares[0]["follower_count"] > compares[1]["follower_count"]:
             print("\nGood job! You were right!")
