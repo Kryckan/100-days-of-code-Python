@@ -1,4 +1,4 @@
-class user:
+class User:
 
     def __init__(self, user_id, username):
         self.id = user_id
@@ -10,8 +10,10 @@ class user:
         user.followers += 1
         self.following += 1
 
-user_1 = user("1", "Chris")
-user_2 = user("2", "Mason")
+
+user_1 = User("1", "Chris")
+user_2 = User("2", "Mason")
+
 
 user_1.follow(user_2)
 
