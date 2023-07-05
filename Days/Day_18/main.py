@@ -16,6 +16,7 @@ def set_color():
         int(random.randint(0, 255)),
         int(random.randint(0, 255)),
     )
+
     return color
 
 
