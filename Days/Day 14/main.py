@@ -29,7 +29,7 @@ def greet():
 
 
 def check_answer():
-    global correct_answer§
+    global correct_answer
     if player_choice == 0:
         if compares[0]["follower_count"] > compares[1]["follower_count"]:
             print("\nGood job! You were right!")
@@ -47,7 +47,6 @@ def check_answer():
                 f'{compares[0]["follower_count"]} million followers, compared to '
                 f'{compares[1]["name"]} with '
                 f'{compares[1]["follower_count"]} million followers'
-
             )
             correct_answer = False
 
@@ -72,7 +71,7 @@ def game():
     while continue_game:
         global player_choice
         check_duplicate()
-        print(f'Round {round_counter}')
+        print(f"Round {round_counter}")
         print(f'\n{compares[0]["name"]}')
         print(f'{compares[0]["description"]} from {compares[0]["country"]}')
         print(art.vs)
@@ -81,13 +80,16 @@ def game():
         player_choice = (
             int(
                 input(
-                    f'Which has the most followers? 1 for {compares[0]["name"]} or 2 for {compares[1]["name"]}: ')) - 1
+                    f'Which has the most followers? 1 for {compares[0]["name"]} or 2 for {compares[1]["name"]}: '
                 )
+            )
+            - 1
+        )
         round_counter += 1
         check_answer()
         if correct_answer is not True:
             continue_game = False
-            if input('Do you want to play again? y/n') == "y":
+            if input("Do you want to play again? y/n") == "y":
                 game()
             else:
                 quit()
