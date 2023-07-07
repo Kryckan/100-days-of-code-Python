@@ -11,5 +11,3 @@ def move_forwards():
 screen.listen()
 screen.onkey(key="space", fun=move_forwards)
 screen.exitonclick()
-
-# make tim move forward 10 spaces when you press space
