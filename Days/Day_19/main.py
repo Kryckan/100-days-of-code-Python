@@ -2,6 +2,7 @@ from turtle import Screen, Turtle
 
 tim = Turtle()
 screen = Screen()
+tim.speed("normal")
 
 
 def move_forwards():
@@ -9,5 +10,7 @@ def move_forwards():
 
 
 screen.listen()
-screen.onkey(key="space", fun=move_forwards)
+screen.onkey(key="w", fun=move_forwards)
+
+
 screen.exitonclick()
