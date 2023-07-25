@@ -10,8 +10,8 @@ user_guess = screen.textinput(
     title="Male your bet", prompt="What color turtle will win? Enter a color: "
 )
 
-colors = ["red", "orange", "yellow", "green", "blue", "purple"]
-all_turtles = []
+colors: list = ["red", "orange", "yellow", "green", "blue", "purple"]
+all_turtles: list = []
 
 for turtle_index in range(0, 6):
     new_turtle = Turtle(shape="turtle")
@@ -22,19 +22,25 @@ for turtle_index in range(0, 6):
 
 
 if user_guess:
-    start_race = True
+    start_race: bool = True
 
 while start_race:
     for turtle in all_turtles:
         random_distance = random.randint(0, 10)
         turtle.forward(random_distance)
         if turtle.xcor() > 230:
-            winning_color = turtle.pencolor()
+            winning_color: str = turtle.pencolor()
             if winning_color == user_guess:
-                print(f"You've won! The {winning_color} turtle is the winner!")
+                print(
+                    f"You've won! The {winning_color} \
+                    turtle is the winner!"
+                )
             else:
-                print(f"You've lost! The {winning_color} turtle is the winner!")
-            start_race = False
+                print(
+                    f"You've lost! The {winning_color} \
+                    turtle is the winner!"
+                )
+            start_race: bool = False
 
 
 screen.exitonclick()
