@@ -9,9 +9,8 @@
 - A - Turn Left
 - D - Turn Right
 - C - Clear Screen
-- Q - Quit
+- Click - Exit
 
 ### How to run:
 - Clone this repo
-- Install dependencies
 - Run `python main.py` in your terminal
