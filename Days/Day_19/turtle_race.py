@@ -4,7 +4,7 @@ from turtle import Screen, Turtle
 screen = Screen()
 
 screen.setup(width=500, height=400)
-start_race = False
+start_race: bool = False
 
 user_guess = screen.textinput(
     title="Male your bet", prompt="What color turtle will win? Enter a color: "
@@ -22,7 +22,7 @@ for turtle_index in range(0, 6):
 
 
 if user_guess:
-    start_race: bool = True
+    start_race = True
 
 while start_race:
     for turtle in all_turtles:
@@ -40,7 +40,7 @@ while start_race:
                     f"You've lost! The {winning_color} \
                     turtle is the winner!"
                 )
-            start_race: bool = False
+            start_race = False
 
 
 screen.exitonclick()
