@@ -4,14 +4,14 @@ from turtle import Screen, Turtle
 screen = Screen()
 
 screen.setup(width=500, height=400)
-start_race = False
+start_race: bool = False
 
 user_guess = screen.textinput(
     title="Male your bet", prompt="What color turtle will win? Enter a color: "
 )
 
-colors = ["red", "orange", "yellow", "green", "blue", "purple"]
-all_turtles = []
+colors: list = ["red", "orange", "yellow", "green", "blue", "purple"]
+all_turtles: list = []
 
 for turtle_index in range(0, 6):
     new_turtle = Turtle(shape="turtle")
@@ -29,11 +29,17 @@ while start_race:
         random_distance = random.randint(0, 10)
         turtle.forward(random_distance)
         if turtle.xcor() > 230:
-            winning_color = turtle.pencolor()
+            winning_color: str = turtle.pencolor()
             if winning_color == user_guess:
-                print(f"You've won! The {winning_color} turtle is the winner!")
+                print(
+                    f"You've won! The {winning_color} \
+                    turtle is the winner!"
+                )
             else:
-                print(f"You've lost! The {winning_color} turtle is the winner!")
+                print(
+                    f"You've lost! The {winning_color} \
+                    turtle is the winner!"
+                )
             start_race = False
 
 
