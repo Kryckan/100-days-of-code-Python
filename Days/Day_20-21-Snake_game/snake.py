@@ -2,13 +2,17 @@ from turtle import Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
+RIGHT = 0
+UP = 90
+LEFT = 180
+DOWN = 270
 
 
 class Snake:
     def __init__(self):
         self.segments: list = []
         self.create_snake()
-        self.snake_head = []
+        self.head = self.segments[0]
         self.add_segment_part = False
         self.parts_added = 0
 
@@ -25,26 +29,23 @@ class Snake:
             newXcor = self.segments[seg_num - 1].xcor()
             newYcor = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(newXcor, newYcor)
-        self.segments[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
 
     def heading_up(self):
-        if not self.segments[0].heading() == 270:
-            self.segments[0].setheading(90)
+        if not self.head.heading() == DOWN:
+            self.head.setheading(UP)
 
     def heading_left(self):
-        if not self.segments[0].heading() == 0:
-            self.segments[0].setheading(180)
+        if not self.head.heading() == RIGHT:
+            self.head.setheading(LEFT)
 
     def heading_down(self):
-        if not self.segments[0].heading() == 90:
-            self.segments[0].setheading(270)
+        if not self.head.heading() == UP:
+            self.head.setheading(DOWN)
 
     def heading_right(self):
-        if not self.segments[0].heading() == 180:
-            self.segments[0].setheading(0)
-
-    def snake_head_pos(self):
-        return self.segments[0].position()
+        if not self.head.heading() == LEFT:
+            self.head.setheading(RIGHT)
 
     def add_segment(self):
         if self.add_segment_part:
