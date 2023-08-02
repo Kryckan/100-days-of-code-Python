@@ -29,11 +29,11 @@ Ensure that you have the required dependencies installed, which can be found wit
 
 ## Todo
 
-- [ ] Create the screen
-- [ ] Create and move two paddles
-- [ ] Create the ball and make it move
-- [ ] Detect collisions with paddles and walls
-- [ ] Detect paddle miss
+- [x] Create the screen
+- [x] Create and move two paddles
+- [x] Create the ball and make it move
+- [x] Detect collisions with paddles and walls
+- [x] Detect paddle miss
 - [ ] Score Board
 
 ## Contributing
