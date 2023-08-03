@@ -16,14 +16,17 @@ Pong is a classic arcade game where two players control paddles to hit a ball ba
 - `main.py`: The main entry point for the game, controlling the game loop and overall flow.
 - `paddle.py`: Contains code related to the paddle objects, including their creation, movement, and rendering.
 - `ball.py`: Contains code related to the ball object, including its creation, movement, and rendering.
+- `score.py`: Contains code related to the score board, including its creation, updating, and rendering.
 
 ## Usage
 
+Game will start automatically. When one player gets a point, the game will pause and you will have to press Space to start next round.
+
 To play the game, run the following command:
 
-\```bash
+```bash
 python main.py
-\```
+```
 
 Ensure that you have the required dependencies installed, which can be found within the Python files.
 
@@ -34,7 +37,7 @@ Ensure that you have the required dependencies installed, which can be found wit
 - [x] Create the ball and make it move
 - [x] Detect collisions with paddles and walls
 - [x] Detect paddle miss
-- [ ] Score Board
+- [x] Score Board
 
 ## Contributing
 
