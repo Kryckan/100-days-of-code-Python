@@ -18,7 +18,7 @@ class Score(Turtle):
         self.goto(0, 280)
         self.color("white")
         self.write(
-            f"Score: {self.score_count} Level: {self.level}, High Score: {self.read_highscore()}",
+            f"Score: {self.score_count} Level: {self.level}, High Score: {self.read_highscore}",
             align=ALIGNMENT,
             font=FONT,
         )
@@ -63,7 +63,7 @@ class Score(Turtle):
         except FileNotFoundError:
             with open("data.txt", mode="w") as file:
                 file.write("0")
-                return 0
+            return 0
 
     def update_highscore(self):
         if self.score_count > self.high_score:
