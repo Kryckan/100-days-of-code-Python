@@ -9,7 +9,7 @@ class Score(Turtle):
     def __init__(self):
         super().__init__()
         self.score_count = 0
-        self.high_score = 0
+        self.high_score = self.read_highscore()
         self.speed_count = 0
         self.level_speed = 0.2
         self.level = 1
@@ -18,7 +18,7 @@ class Score(Turtle):
         self.goto(0, 280)
         self.color("white")
         self.write(
-            f"Score: {self.score_count} Level: {self.level}, High Score: {self.high_score}",
+            f"Score: {self.score_count} Level: {self.level}, High Score: {self.read_highscore()}",
             align=ALIGNMENT,
             font=FONT,
         )
@@ -28,7 +28,7 @@ class Score(Turtle):
         self.score_count += 1
         self.speed_count += 1
         self.write(
-            f"Score: {self.score_count} Level: {self.level}, High Score: {self.high_score}",
+            f"Score: {self.score_count} Level: {self.level}, High Score: {self.read_highscore()}",
             align=ALIGNMENT,
             font=FONT,
         )
@@ -43,13 +43,30 @@ class Score(Turtle):
     def reset(self):
         self.clear()
         if self.score_count > self.high_score:
-            self.high_score = self.score_count
-            self.write(
-                f"Score: {self.score_count} Level: {self.level}, High Score: {self.high_score}",
-                align=ALIGNMENT,
-                font=FONT,
-            )
+            self.update_highscore()
+        self.write(
+            f"Score: {self.score_count} Level: {self.level}, High Score: {self.high_score}",
+            align=ALIGNMENT,
+            font=FONT,
+        )
+
         self.score_count = 0
         self.level = 1
         self.level_speed = 0.2
         self.speed_count = 0
+
+    def read_highscore(self):
+        try:
+            with open("data.txt", mode="r") as file:
+                contents = file.read()
+                return int(contents)
+        except FileNotFoundError:
+            with open("data.txt", mode="w") as file:
+                file.write("0")
+                return 0
+
+    def update_highscore(self):
+        if self.score_count > self.high_score:
+            new_high_score = self.score_count
+            with open("data.txt", mode="w") as file:
+                file.write(str(new_high_score))
