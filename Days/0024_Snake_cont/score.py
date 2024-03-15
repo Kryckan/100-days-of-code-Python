@@ -56,7 +56,7 @@ class Score(Turtle):
             font=FONT,
         )
 
-    def read_highscore(self):
+    def read_highscore(self) -> int:
         # Path relative to the current script
         directory = os.path.dirname(__file__)
         file_path = os.path.join(directory, "data.txt")
@@ -70,7 +70,7 @@ class Score(Turtle):
                 file.write("0")
             return 0
 
-    def update_highscore(self):
+    def update_highscore(self) -> None:
         # Path relative to the current script
         directory = os.path.dirname(__file__)
         file_path = os.path.join(directory, "data.txt")
