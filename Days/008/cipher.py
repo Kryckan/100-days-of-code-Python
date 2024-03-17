@@ -5,6 +5,7 @@ import letters
 
 cont = True
 
+
 # Encryption
 def encrypt(text, shift):
     encryptMessage = []
