@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. States Game</title>
+    <style>
+    #game-container {
+      position: relative;
+    }
+    #map-image {
+      width: 800px;
+      height: 600px;
+    }
+    .state-label {
+      position: absolute;
+      font-size: 12px;
+      color: black;
+      background-color: white;
+      padding: 2px;
+    }
+  </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <h1>U.S. States Game</h1>
+      <img id="map-image" src="blank_states_img.gif" alt="U.S. States Map">
+      <div id="score-display">Score: 0</div>
+      <input type="text" id="guess-input" placeholder="Enter a state name">
+      <button id="submit-button">Submit</button>
+      <button id="cancel-button">Cancel</button>
+    </div>
+
+    <script>
+    const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const guessInput = document.getElementById('guess-input');
+    const scoreDisplay = document.getElementById('score-display');
+    const gameContainer = document.getElementById('game-container');
+    const mapImage = document.getElementById('map-image');
+
+    let statesData = [];
+    let correctGuesses = new Set();
+
+    // Load the CSV file using fetch
+    fetch('50_states.csv')
+      .then(response => response.text())
+      .then(data => {
+        // Parse the CSV data
+        const rows = data.split('\n');
+        rows.forEach(row => {
+          const [state, x, y] = row.split(',');
+          statesData.push({ state, x: parseInt(x), y: parseInt(y) });
+        });
+      })
+      .catch(error => {
+        console.error('Error loading CSV file:', error);
+      });
+
+    submitButton.addEventListener('click', function() {
+      const guess = guessInput.value.trim().toLowerCase();
+      if (guess !== '') {
+        const stateFound = statesData.find(state => state.state.toLowerCase() === guess);
+        if (stateFound && !correctGuesses.has(guess)) {
+          correctGuesses.add(guess);
+          updateScoreDisplay();
+          displayGuessOnMap(stateFound.state, stateFound.x, stateFound.y);
+          guessInput.value = '';
+        }
+      }
+    });
+
+    cancelButton.addEventListener('click', function() {
+      // Exit the game
+      window.location.href = 'game-over.html'; // Redirect to a game over page
+    });
+
+    function updateScoreDisplay() {
+      scoreDisplay.textContent = `Score: ${correctGuesses.size}`;
+    }
+
+    function displayGuessOnMap(state, x, y) {
+      const label = document.createElement('div');
+      label.textContent = state;
+      label.classList.add('state-label');
+      const mapWidth = mapImage.width;
+      const mapHeight = mapImage.height;
+      const adjustedX = x + mapWidth / 2;
+      const adjustedY = mapHeight / 2 - y;
+      label.style.left = `${adjustedX}px`;
+      label.style.top = `${adjustedY}px`;
+      gameContainer.appendChild(label);
+    }
+  </script>
+  </body>
+</html>
