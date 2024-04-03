@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
+# Constants
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
@@ -19,45 +20,51 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+
+# Global variables
 countdown_on = False
-timer_seconds = 0  # Added global variable to keep track of the time in seconds
-global timer_label, countdown_timer  # Declare timer and countdown_timer as global variables
+timer_seconds = 0
+timer_label = None
+countdown_timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
 def reset_timer():
+    global countdown_on, timer_seconds
     countdown_on = False
     timer_seconds = 0
-    timer_label.setText("25:00")
-    countdown_timer.stop()  # Stop the timer when resetting
+    if timer_label is not None:  # Ensure timer_label is initialized
+        timer_label.setText("25:00")
+    if countdown_timer is not None:  # Ensure countdown_timer is initialized
+        countdown_timer.stop()
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    global countdown_on, timer_seconds, countdown_timer  # Include countdown_timer in the global declaration
+    global countdown_on, timer_seconds, countdown_timer
     countdown_on = True
     timer_seconds = WORK_MIN * 60 - 1
     countdown_timer = QTimer()
     countdown_timer.timeout.connect(update_timer)
-    countdown_timer.start(1000)  # Timer updates every 1000 milliseconds (1 second)
+    countdown_timer.start(1000)
 
 
 def update_timer():
-    global timer_seconds, timer_label, countdown_timer  # Include countdown_timer in the global declaration
+    global timer_seconds
     if countdown_on and timer_seconds > 0:
         mins, secs = divmod(timer_seconds, 60)
         time_format = "{:02d}:{:02d}".format(mins, secs)
-        timer_label.setText(time_format)
+        if timer_label is not None:
+            timer_label.setText(time_format)
         timer_seconds -= 1
     else:
-        countdown_timer.stop()  # Stop the timer when countdown is finished or not active
+        if countdown_timer is not None:  # Check if countdown_timer is initialized
+            countdown_timer.stop()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
-def app():
-    global timer_label  # Declare timer as global within the function scope
-    app = QApplication([])
-    window = QWidget()
+def setup_ui(window):
+    global timer_label
     window.setWindowTitle("Pomodoro")
     window.setFixedSize(300, 330)
     window.setObjectName("MainWindow")
@@ -100,7 +107,6 @@ def app():
     )
     main_layout.addWidget(timer_label)
 
-    # Create a horizontal layout for the buttons
     buttons_layout = QHBoxLayout()
 
     start_button = QPushButton("Start")
@@ -115,7 +121,6 @@ def app():
     buttons_layout.addWidget(start_button)
     start_button.clicked.connect(start_timer)
 
-    # Add another button if needed, for example, a stop button
     reset_button = QPushButton("Reset")
     reset_button.setStyleSheet(
         """
@@ -127,15 +132,20 @@ def app():
     )
     buttons_layout.addWidget(reset_button)
     reset_button.clicked.connect(reset_timer)
-    # stop_button.clicked.connect(stop_timer)  # Assuming you have or will create a stop_timer function
 
-    # Add the buttons layout to the main layout
     main_layout.addLayout(buttons_layout)
 
     window.setLayout(main_layout)
+
+
+# ---------------------------- MAIN ------------------------------- #
+def main():
+    app = QApplication([])
+    window = QWidget()
+    setup_ui(window)
     window.show()
     app.exec_()
 
 
 if __name__ == "__main__":
-    app()
+    main()
