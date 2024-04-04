@@ -115,9 +115,19 @@ def setup_ui(window):
         QPushButton {
             background-color: #9bdeac;
             background-image: none;
+            margin: 10px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        QPushButton:hover {
+            background-color: #a6e4b9;
+        }
+        QPushButton:pressed {
+            background-color: #89c99e;
         }
         """
     )
+
     buttons_layout.addWidget(start_button)
     start_button.clicked.connect(start_timer)
 
@@ -127,6 +137,15 @@ def setup_ui(window):
         QPushButton {
             background-color: #e2979c;
             background-image: none;
+            margin: 10px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        QPushButton:hover {
+            background-color: #e7a6b3;
+        }
+        QPushButton:pressed {
+            background-color: #cb8290;
         }
         """
     )
