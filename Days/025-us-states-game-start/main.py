@@ -7,6 +7,7 @@ screen.title("U.S. States Game")
 image = "Days/025-us-states-game-start/blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
+turtle.speed(0)  # Set the main turtle's speed to the fastest
 exit = False
 
 correct_guesses: set[str] = set()
@@ -28,13 +29,15 @@ def update_score_display():
 
 def new_turtle(x: int, y: int, state: str):
     state_turtle = turtle.Turtle()
+    state_turtle.speed(0)  # Set drawing speed to the fastest
     state_turtle.hideturtle()
     state_turtle.penup()
     state_turtle.goto(int(x), int(y))
-    state_turtle.write(state)
+    state_turtle.write(state, align="center")
+    screen.update()  # Force screen update after drawing
 
 
-def get_answer() -> bool:
+def process_state_guess() -> bool:
     global exit
     answer_state = screen.textinput(
         title="Guess the State", prompt="What's another state's name?"
@@ -55,10 +58,11 @@ def get_answer() -> bool:
 while True:
     if exit:
         break
-    if get_answer():
+    if process_state_guess():
         state_name = list(correct_guesses)[-1]
         state_data = answers[answers.state == state_name]
         x_cor, y_cor = state_data.x.iloc[0], state_data.y.iloc[0]
         new_turtle(x_cor, y_cor, state_name)
+        screen.update()
 
 turtle.mainloop()

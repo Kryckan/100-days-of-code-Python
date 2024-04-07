@@ -86,7 +86,7 @@
       const mapWidth = mapImage.width;
       const mapHeight = mapImage.height;
       const adjustedX = x + mapWidth / 2;
-      const adjustedY = mapHeight / 2 - y;
+      const adjustedY = mapHeight / 2 - y + 75; // Adjusted to display 30px further down
       label.style.left = `${adjustedX}px`;
       label.style.top = `${adjustedY}px`;
       gameContainer.appendChild(label);
