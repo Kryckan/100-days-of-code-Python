@@ -30,6 +30,7 @@ countdown_timer = None
 start_button_text: str = "Start"
 start_button = None
 
+# Set the current directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 big_tomato = os.path.join(current_dir, "tomato.png")
 
@@ -73,6 +74,7 @@ def start_timer():
         countdown_timer.start(1000)
 
 
+# ---------------------------- TIMER UPDATE ------------------------------- #
 def update_timer():
     global timer_seconds
     if countdown_on and timer_seconds > 0:
@@ -124,6 +126,7 @@ def setup_ui(window):
     )
     main_layout.addWidget(header_label)
 
+    # -------------------------- Timer Label -------------------------- #
     timer_label = QLabel("25:00")
     timer_label.setObjectName("timer")
     timer_label.setAlignment(Qt.AlignHCenter)
@@ -137,7 +140,7 @@ def setup_ui(window):
     main_layout.addWidget(timer_label)
 
     buttons_layout = QHBoxLayout()
-
+    # -------------------------- Start Button -------------------------- #
     start_button = QPushButton(start_button_text)
     start_button.setStyleSheet(
         """
@@ -160,6 +163,7 @@ def setup_ui(window):
     buttons_layout.addWidget(start_button)
     start_button.clicked.connect(start_timer)
 
+    # -------------------------- Reset Button -------------------------- #
     reset_button = QPushButton("Reset")
     reset_button.setStyleSheet(
         """
@@ -182,7 +186,6 @@ def setup_ui(window):
     reset_button.clicked.connect(reset_timer)
 
     main_layout.addLayout(buttons_layout)
-
     window.setLayout(main_layout)
 
 
