@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
 # Constants
 PINK = "#e2979c"
 RED = "#e7305b"
-GREEN = "#9bdeac"
+GREEN = "rgba(100, 200, 140, 1)"
 YELLOW = "#f7f5dd"
 FONT_NAMES = ["poppins", "Courier", "Arial", "Helvetica", "Times New Roman"]
 FONT_NAME = ""
@@ -29,10 +29,13 @@ timer_label = None
 countdown_timer = None
 start_button_text: str = "Start"
 start_button = None
+num_tomatoes: int = 3
+tomatoes_layout = QHBoxLayout()
 
 # Set the current directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 big_tomato = os.path.join(current_dir, "tomato.png")
+small_tomato = os.path.join(current_dir, "small_tomato.png")
 
 
 def check_fonts_availability():
@@ -88,13 +91,27 @@ def update_timer():
             countdown_timer.stop()
 
 
+def add_small_tomato(num_tomatoes: int):
+    global tomatoes_layout
+    widget = QWidget()
+    layout = tomatoes_layout
+    layout.setAlignment(Qt.AlignCenter)
+    for _ in range(num_tomatoes):
+        label = QLabel()
+        pixmap = QPixmap(small_tomato)
+        label.setPixmap(pixmap.scaled(32, 32))
+        layout.addWidget(label)
+    widget.setLayout(layout)
+    return widget
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 # TODO: Add a line with tomatos that correspond to the number of sessions made.
 # NOTE: 5min break after every session but the 4th one that gets 25min.
 
 
 def setup_ui(window):
-    global timer_label, start_button, big_tomato
+    global timer_label, start_button, big_tomato, tomatoes_layout
     print(current_dir)
     window.setWindowTitle("Pomodoro")
     window.setFixedSize(300, 330)
@@ -133,11 +150,15 @@ def setup_ui(window):
     timer_label.setStyleSheet(
         """
         #timer {
-            color: #ffffff; font-size: 42px; font-family: 'Poppins';
+            color: #222222; font-size: 42px; font-family: 'Poppins';
         }
     """
     )
     main_layout.addWidget(timer_label)
+
+    # Tomatoes
+    tomato_widget = add_small_tomato(num_tomatoes)
+    main_layout.addWidget(tomato_widget)
 
     buttons_layout = QHBoxLayout()
     # -------------------------- Start Button -------------------------- #
