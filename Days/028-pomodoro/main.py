@@ -16,7 +16,7 @@ PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
-FONT_NAMES = ["Poppins", "Courier", "Arial", "Helvetica", "Times New Roman"]
+FONT_NAMES = ["poppins", "Courier", "Arial", "Helvetica", "Times New Roman"]
 FONT_NAME = ""
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
@@ -87,6 +87,10 @@ def update_timer():
 
 
 # ---------------------------- UI SETUP ------------------------------- #
+# TODO: Add a line with tomatos that correspond to the number of sessions made.
+# NOTE: 5min break after every session but the 4th one that gets 25min.
+
+
 def setup_ui(window):
     global timer_label, start_button, big_tomato
     print(current_dir)
