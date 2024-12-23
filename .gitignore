@@ -65,6 +65,7 @@ venv/
 ENV/
 env/
 
+passwords.json
 
 # End Generation Here
 
